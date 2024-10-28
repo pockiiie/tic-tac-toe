@@ -13,16 +13,17 @@ export default function Tile({ own, position }: { own: number, position: number[
   }
 
   // all params came from AppContext.Provider in page.tsx
-  const { 
-    tiles, 
-    setTiles, 
-    isEnd, 
-    setIsEnd, 
-    turn, 
-    setTurn, 
-    setNextTurn, 
-    setWinner, 
-    setIsDraw
+  const {
+    tiles,
+    setTiles,
+    isEnd,
+    setIsEnd,
+    turn,
+    setTurn,
+    setNextTurn,
+    setWinner,
+    setIsDraw,
+    size,
   } = useAppContext()
 
   // check row for winner
@@ -140,13 +141,30 @@ export default function Tile({ own, position }: { own: number, position: number[
   }
 
   return (
-    <div className={`bg-gray-800 w-auto h-auto md:h-[22vh] rounded-lg flex justify-center items-center overflow-clip`}
+    <div className={`bg-gray-800 w-auto rounded-lg flex justify-center items-center overflow-clip
+      
+      ${size === 3 && 'h-[13vh] md:h-[22.6vh]'}
+      ${size === 4 && 'h-[9.8vh] md:h-[16.8vh]'}
+      ${size === 5 && 'h-[7.8vh] md:h-[13.4vh]'}
+      ${size === 6 && 'h-[6.4vh] md:h-[11vh] rounded-md'}
+      ${size === 7 && 'h-[5.4vh] md:h-[9.4vh] rounded-md'}
+      ${size === 8 && 'h-[4.8vh] md:h-[8.2vh] rounded-md'}
+      ${size === 9 && 'h-[4.2vh] md:h-[7vh] rounded-md'}
+      ${size === 10 && 'h-[3.8vh] md:h-[6.4vh] rounded-md'}
+      `}
       onClick={handleTileClick}
     >
       <div className={`
-        ${own === 1 ? 'text-blue-500' : 'text-red-500'} 
-        ${own === 0 ? 'invisible' : ''}
         text-8xl md:text-[20vh] w-full text-center
+        ${own === 1 ? 'text-blue-500' : 'text-red-500'} 
+        ${own === 0 && 'invisible'}
+        ${size === 4 && 'md:text-[14vh]'}
+        ${size === 5 && 'md:text-[12vh]'}
+        ${size === 6 && 'md:text-[9vh]'}
+        ${size === 7 && 'md:text-[8vh]'}
+        ${size === 8 && 'md:text-[7vh]'}
+        ${size === 9 && 'md:text-[6vh]'}
+        ${size === 10 && 'md:text-[5vh]'}
         `}>
         <input type="hidden" name="tileNumber" value={position.toString()} />
         {displayPlayer(own)}

@@ -3,13 +3,6 @@ import { createContext, useContext } from "react";
 // Define type for setFunction of useState
 export type TileType = number[][]
 
-// Initial tiles array
-// export const initTiles = [
-//   ['x', 'o', 'x'],
-//   ['o', 'x', 'o'],
-//   ['o', 'o', 'n']
-// ]
-
 export const initTiles = [
   [0, 0, 0],
   [0, 0, 0],
@@ -30,6 +23,8 @@ export const AppContext = createContext({
   setWinner: (_: number) => { },
   isDraw: false,
   setIsDraw: (_: boolean) => { },
+  size: 3,
+  setSize: (_: number) => { }
 })
 
 export const useAppContext = () => useContext(AppContext)
