@@ -1,7 +1,7 @@
 import { createContext, useContext } from "react";
 
 // Define type for setFunction of useState
-export type TileType = number[][]
+export type Tiles = number[][]
 
 export const initTiles = [
   [0, 0, 0],
@@ -12,7 +12,7 @@ export const initTiles = [
 // createContext parameters must be the same as useState variable and function to set in Provider
 export const AppContext = createContext({
   tiles: initTiles,
-  setTiles: (_: TileType) => { }, //mimic useState setFunction
+  setTiles: (_: Tiles) => { }, //mimic useState setFunction
   isEnd: false,
   setIsEnd: (_: boolean) => { },
   turn: 0,

@@ -14,10 +14,10 @@ export default function Home() {
   const [isDraw, setIsDraw] = useState(false)
   const [size, setSize] = useState(3)
 
-  const boardSize = [3, 4, 5, 6, 7, 8, 9, 10]
+  const boardSize = [3, 4, 5]
 
   useEffect(() => {
-    createTiles(size);
+    createTiles(size)
   }, [size])
 
   // Create board tiles with specify number
@@ -50,7 +50,7 @@ export default function Home() {
     newGame()
   }
 
-  // New Game button clic
+  // New Game button click
   const handleNewGameClick = () => {
     newGame()
   }
@@ -60,53 +60,53 @@ export default function Home() {
       <div className="absolute p-4">
         Created by <a className="bg-amber-600 px-2 py-1 rounded-lg" target="_blank" href="https://github.com/pockiiie/tic-tac-toe">pockiiie</a>
       </div>
-      <main className="grid grid-col-1 items-center justify-center min-h-lvh">
-        <div className="w-full flex justify-center">
-          <select name="size" id="size"
-            onChange={handleSizeChange}
-            className="block w-52 px-2 py-0 mx-2 text-black bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-            {
-              boardSize.map(size => {
-                return (
-                  <option key={size} value={size}>{size + 'x' + size}</option>
-                )
-              })
-            }
-          </select>
-          <button className="bg-slate-600 rounded-md p-2"
-            type="button"
-            onClick={handleNewGameClick}
-          >
-            New Game
-          </button>
-        </div>
-        <div className="w-full">
-          {/* Assign variables and functions in to value of BoardContext Provider then 
+      {/* Assign variables and functions in to value of BoardContext Provider then 
         you can use it in any child component via react.useContext function */}
-          <AppContext.Provider value={{
-            tiles, setTiles,
-            isEnd, setIsEnd,
-            turn, setTurn,
-            nextTurn, setNextTurn,
-            winner, setWinner,
-            isDraw, setIsDraw,
-            size, setSize
-          }}>
+      <AppContext.Provider value={{
+        tiles, setTiles,
+        isEnd, setIsEnd,
+        turn, setTurn,
+        nextTurn, setNextTurn,
+        winner, setWinner,
+        isDraw, setIsDraw,
+        size, setSize
+      }}>
+        <main className="grid grid-row-3 items-center justify-center min-h-lvh">
+          <div className="w-full flex justify-center">
+            <select name="size" id="size"
+              onChange={handleSizeChange}
+              className="block w-52 px-2 py-0 mx-2 text-black bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+              {
+                boardSize.map(size => {
+                  return (
+                    <option key={size} value={size}>{size + 'x' + size}</option>
+                  )
+                })
+              }
+            </select>
+            <button className="bg-slate-600 rounded-md p-2"
+              type="button"
+              onClick={handleNewGameClick}
+            >
+              New Game
+            </button>
+          </div>
+          <div className="w-full overflow-clip">
             <Board />
-          </AppContext.Provider>
-        </div>
-        <div className="w-full text-[6vh] text-center">
-          <span className={`${(winner === 0 && !isDraw) ? 'block' : 'hidden'}`}>
-            Player {displayPlayer(nextTurn)}
-          </span>
-          <span className={`${(winner !== 0 && !isDraw) ? 'block' : 'hidden'}`}>
-            Winner is {displayPlayer(winner)}
-          </span>
-          <span className={`${isDraw ? 'block' : 'hidden'}`}>
-            TIE is a LAME!
-          </span>
-        </div>
-      </main>
-    </div>
+          </div>
+          <div className="w-full text-[6vh] text-center">
+            <span className={`${(winner === 0 && !isDraw) ? 'block' : 'hidden'}`}>
+              Player {displayPlayer(nextTurn)}
+            </span>
+            <span className={`${(winner !== 0 && !isDraw) ? 'block' : 'hidden'}`}>
+              Winner is {displayPlayer(winner)}
+            </span>
+            <span className={`${isDraw ? 'block' : 'hidden'}`}>
+              TIE is a LAME!
+            </span>
+          </div>
+        </main>
+      </AppContext.Provider>
+    </div >
   );
 }
